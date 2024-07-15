@@ -11,6 +11,27 @@ import requests
 load_dotenv()
 api=getenv("riotAPI")
 
+
+
+regions={
+    'br1' : 'Brazil',
+    'eun1' : 'Europe Nordic & East',
+    'euw1' : 'Europe West',
+    'jp1' : 'Japan',
+    'kr' : 'Republic of Korea',
+    'la1' : 'Latin America North',
+    'la2' : 'Latin America South',
+    'na1' : 'North America',
+    'oc1' : 'Oceania',
+    'tr1' : 'Turkey',
+    'ru' : 'Russia',
+    'ph2' : 'The Philippines',
+    'sg2' : 'Singapore, Malaysia, & Indonesia',
+    'th2' : 'Thailand',
+    'tw2' : 'Taiwan, Hong Kong, and Macao',
+    'vn2' : 'Vietnam',
+}
+
 class searchsummoner:
     """Search a sumonner by different keys.
     
@@ -23,20 +44,22 @@ class searchsummoner:
     
     """
 
-    def by_name(summoner_name, server):
-        
+    def by_name(server, name, tag):
+        "returns the basic stat of the summoner"
+        #finds puuid
         payload={"api_key":api}
-        url= "https://"+ server +".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+ summoner_name
+        url= f"https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
+        r=requests.get(url, params=payload)
+        puuid=r.json()['puuid']
+
+        #using puuid to find summoner stats
+        payload={"api_key":api}
+        url= f"https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
         r=requests.get(url, params=payload)
         return r.json()
 
 
-    def by_sumonnerID(summoner_id, server):
-        
-        payload={"api_key":api}
-        url= "https://"+ server +".api.riotgames.com/lol/summoner/v4/summoners/"+ summoner_id
-        r=requests.get(url, params=payload)
-        return r.json()
+    
 
     def by_puuid(puuid,server):
         url="https://"+server+".api.riotgames.com/lol/summoner/v4/summoners/by-puuid/"+puuid+"?api_key="+api
@@ -55,8 +78,13 @@ class searchsummoner:
 
 
 class summonerStats:
-    region={'br1': 'americas', 'eun1': 'europe', 'euw1': 'europe', 'jp1': 'asia', 'kr': 'asia', 'la1': 'americas', 'la2': 'americas', 'na1': 'americas', 'oc1': 'sea', 'tr1': 'europe', 'ru': 'europe', 'ph2': 'sea', 'sg2': 'sea', 'th2': 'sea', 'tw2': 'sea', 'vn2': 'sea'}
     "used to access the player's profile stats history"
+
+    
+
+
+
+
     def highestmastery(id, server):
         """highestmastery(id, server)
         returns stats for highest mastery champion"""
@@ -117,6 +145,19 @@ class summonerStats:
         
     
     def matchdetails(matchid):
+        # might require to reroute regions for matchv4
+        # if server in ['na1', 'br1', 'la1', 'la2']:
+        #     server="americas"
+        # elif server in ['jp1', 'kr', 'sg2']:
+        #     server="asia"
+        # elif server in ['eun1', 'euw1']:
+        #     server="europe"
+        # elif server in []:
+        #     server="sea"
+        # else:
+        #     server="esports"
+
+
         region=summonerStats.region
         server=matchid.split("_")[0].lower()
         url="https://"+region[server]+".api.riotgames.com/lol/match/v5/matches/"+matchid+"?api_key="+api

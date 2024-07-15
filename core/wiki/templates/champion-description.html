@@ -1,0 +1,128 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h3 class="text-light">
+        <small class="text-light text-opacity-25">Champion</small>
+        {{ title }}
+    </h3>
+    <br><br><br>
+
+    <!-- Splash art -->
+    
+    <div id="carouselExampleCaptions" class="carousel slide">
+        
+        <div class="carousel-inner">
+            {% for i in skins %}
+                {% if i is skins.0 %}
+                <div class="carousel-item active">
+                {% else %}
+                <div class="carousel-item">
+                {% endif %}
+                    <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{champ.id}}_{{i.num}}.jpg" class="d-block w-100" alt="{{i.name}}">
+                    <div class="carousel-caption d-none d-md-block">
+                        {% if i is skins.0 %}
+                        <h5></h5>
+                        {% else %}
+                        <h5 class="bg-dark bg-opacity-50">{{ i.name }}</h5>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+          
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <br><br><br>
+
+
+
+    <!-- Champion stats in details -->
+
+    <dl class="row text-light">
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Name</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">{{ champ.name }}</dd>
+        <br><br>
+
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Title</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">{{champ.title}}</dd>
+        <br><br>
+
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Lore</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">{{champ.lore}}</dd>
+        <br><br>
+
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Class</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">
+            <ul>
+                {% for j in champ.tags %}
+                <li>{{ j }}</li>
+                {% endfor %}
+            </ul>
+        </dd>
+        <br><br><br><br>
+
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Base Stats</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">
+
+            <table class="table table-dark table-hover table-borderless">
+                <caption class="text-opacity-25 text-light text-faded">Base Stats</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Level</th>
+                    <th scope="col">HP</th>
+                    <th scope="col">Hp Regen</th>
+                    <th scope="col">MP</th>
+                    <th scope="col">MP Regen</th>
+                    <th scope="col">Atk Damage</th>
+                    <th scope="col">Atk Speed</th>
+                    <th scope="col">Armor</th>
+                    <th scope="col">Spellblock</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in stats %}
+                        <tr class="text-light">
+                            <td>{{ i.0 }}</td>
+                            <td>{{ i.1 }}</td>
+                            <td>{{ i.2 }}</td>
+                            <td>{{ i.3 }}</td>
+                            <td>{{ i.4 }}</td>
+                            <td>{{ i.5 }}</td>
+                            <td>{{ i.6 }}</td>
+                            <td>{{ i.7 }}</td>
+                            <td>{{ i.8 }}</td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </dd>
+        <br><br><br><br>
+
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Title</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">{{champ.title}}</dd>
+        <br><br>
+
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Title</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">{{champ.title}}</dd>
+        <br><br>
+
+        <dt class="col-sm-3 text-truncate text-light fw-bolder text-end">Title</dt>
+        <dd class="col-sm-9 text-light text-opacity-50">{{champ.title}}</dd>
+        <br><br>
+
+    </dl>
+    
+{% endblock %}

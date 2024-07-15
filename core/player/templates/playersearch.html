@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+<style>
+
+</style>
+
+{% block content %}
+
+<h3 class="text-light">
+    <small class="text-light text-opacity-25">Live Search</small>
+    Player
+</h3>
+<div style="height: 200px;"></div>
+
+
+<!-- creating the search field for player search -->
+
+<form class="bg-dark bg-opacity-25" method="post" action="/searchsummoner/">
+  {% csrf_token %}
+  <div style="height: 50px;"></div>
+  <div class="row g-3 justify-content-md-center">
+    <h1 class="col-auto text-light">
+      <small class="text-light text-opacity-75">Explore the Rift:</small>
+      Find your summoner's insights
+  </h1>
+  </div>
+  
+  <div style="height: 50px;"></div>
+  <div class="row g-3 justify-content-md-center">
+    <div class="col-4">
+      <label class="visually-hidden" for="name">Username</label>
+      <input name="name" type="text" class="form-control" id="name" placeholder="Username" required>
+    </div>
+    <div class="col-2">
+      <label class="visually-hidden" for="tag">tag</label>
+      <div class="input-group">
+        <div class="input-group-text">#</div>
+        <input name="tag" type="text" class="form-control" id="tag" placeholder="Tag" required>
+      </div>
+    </div>
+    <div class="col-2">
+      <label class="visually-hidden" for="server">Server</label>
+      <select name="server" class="form-select" id="server">
+        <option value="br1">Brazil</option>
+        <option selected value="eun1">Europe Nordic & East</option>
+        <option value="euw1">Europe West</option>
+        <option value="jp1">Japan</option>
+        <option value="kr">Republic of Korea</option>
+        <option value="la1">Latin America North</option>
+        <option value="la2">Latin America South</option>
+        <option value="na1">North America</option>
+        <option value="oc1">Oceania</option>
+        <option value="tr1">Turkey</option>
+        <option value="ru">Russia</option>
+        <option value="ph2">The Philippines</option>
+        <option value="sg2">Singapore, Malaysia, & Indonesia</option>
+        <option value="th2">Thailand</option>
+        <option value="tw2">Taiwan, Hong Kong, and Macao</option>
+        <option value="vn2">Vietnam</option>
+        
+      </select>
+    </div>
+  </div>
+  <br>
+  <div class="row g-3 justify-content-md-center">
+    
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-light">Search Summoner</button>
+    </div>
+    <div class="col-auto">
+      <button type="reset" class="btn btn-outline-danger">Clear Search</button>
+    </div>
+  </div>
+  <div style="height: 50px;"></div>
+</form> 
+  
+
+  
+{% endblock %}
+

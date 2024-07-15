@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3 style="color: aliceblue;">
+        <small class="text-muted">Archive</small>
+        Items
+    </h3>
+
+    <!-- Champion list cards -->
+    <div class="container">
+        <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+            {% for i in data %}
+                <div class="col">
+                    <div class="p-3 border">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0" style="background-color: rgba(0, 0, 0, 0.087);">
+                                <div class="col-md-4">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/{{ i.3 }}_0.jpg"  class="img-fluid rounded-start" alt="Image of {{ i.0 }}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <!-- Use champ_data['name'] here -->
+                                        <h5 class="card-title">{{ i.0 }}</h5>
+                                        <p class="card-text">{{ i.1|title }}</p>
+                                        <p class="card-text"><small class="text-muted">{{ i.2 }}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
