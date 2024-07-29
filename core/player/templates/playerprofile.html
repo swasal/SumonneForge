@@ -3,6 +3,68 @@
 
 {% block content %}
 
+<h3 class="text-light">
+    <small class="text-light text-opacity-25">Player profile</small>
+    {{ name }}#{{ tag }}
+</h3>
+<div style="height: 100px;"></div>
 
+
+<!-- Sumonner profile -->
+
+<div class="container text-center">
+    <div class="row">
+      <div class="col-3">
+        <!-- profile picture -->
+        <img src="https://ddragon.leagueoflegends.com/cdn/14.13.1/img/profileicon/{{ profileicon }}.png">
+      </div>
+      <div class="col-9 text-start">
+        <!-- Minor stats and charts -->
+         Minor stats
+      </div>
+    </div>
+
+    <!-- section breaker -->
+    <div style="height: 50px;"></div>
+
+
+    <!-- Main data -->
+    <div class="row">
+      <div class="col-4">
+        <!-- summoner details -->
+        <dl class="row text-light">
+          <dt class="col-sm-3 text-truncate text-light text-opacity-50 fw-bolder text-end">Name</dt>
+          <dd class="col-sm-9 text-light text-start">{{ name }}</dd>
+          <br><br>
+
+          <dt class="col-sm-3 text-truncate text-light text-opacity-50 fw-bolder text-end">Tagline</dt>
+          <dd class="col-sm-9 text-light text-start">{{tag}}</dd>
+          <br><br>
+
+          <dt class="col-sm-3 text-truncate text-light text-opacity-50 fw-bolder text-end">Level</dt>
+          <dd class="col-sm-9 text-light text-start">{{level}}</dd>
+          <br><br>
+
+          <dt class="col-sm-3 text-truncate text-light text-opacity-50 fw-bolder text-end">Ranked <br> Solo</dt>
+          <dd class="col-sm-9 text-light text-start"> {{rank.solo.rank}} <br> [ {{rank.solo.lp}} LP]</dd>
+          <br><br><br><br>
+
+          <dt class="col-sm-3 text-truncate text-light text-opacity-50 fw-bolder text-end">Ranked <br> Flex</dt>
+          <dd class="col-sm-9 text-light text-start"> {{rank.flex.rank}} <br>[ {{rank.flex.lp}} LP]</dd>
+          <br><br><br><br>
+
+          <dt class="col-sm-3 text-truncate text-light text-opacity-50 fw-bolder text-end">Level</dt>
+          <dd class="col-sm-9 text-light text-start">{{level}}</dd>
+          <br><br>
+
+      </dl>
+      </div>
+      <div class="col-8">
+        <!-- Match History cards -->
+        {{ matches }}
+      </div>
+      
+    </div>
+  </div>
 
 {% endblock %}

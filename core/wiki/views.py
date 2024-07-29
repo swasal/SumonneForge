@@ -120,6 +120,6 @@ def champdescription(request, id):
 
 def items(request):
     title="items"
-    return render(request, 'archove-items.html', {
+    return render(request, 'archive-items.html', {
         'title': title
     })

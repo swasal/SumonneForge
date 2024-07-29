@@ -5,14 +5,12 @@ import requests
 
 
 
-
-
 #getting the api from local machine 
 load_dotenv()
-api=getenv("riotAPI")
+api=getenv("riot_API")
 
 
-
+# global regions
 regions={
     'br1' : 'Brazil',
     'eun1' : 'Europe Nordic & East',
@@ -32,6 +30,7 @@ regions={
     'vn2' : 'Vietnam',
 }
 
+
 class searchsummoner:
     """Search a sumonner by different keys.
     
@@ -44,18 +43,22 @@ class searchsummoner:
     
     """
 
+    server={
+
+    }
+
     def by_name(server, name, tag):
         "returns the basic stat of the summoner"
         #finds puuid
-        payload={"api_key":api}
+        payload={"X-Riot-Token":api}
         url= f"https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
-        r=requests.get(url, params=payload)
+        r=requests.get(url, headers=payload)
         puuid=r.json()['puuid']
 
         #using puuid to find summoner stats
-        payload={"api_key":api}
+        payload={"X-Riot-Token":api}
         url= f"https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
-        r=requests.get(url, params=payload)
+        r=requests.get(url, headers=payload)
         return r.json()
 
 
@@ -69,9 +72,9 @@ class searchsummoner:
 
     def by_accountID(account_ID, server):
 
-        payload={"api_key":api}
+        payload={"X-Riot-Token":api}
         url= "https://" + server + ".api.riotgames.com/lol/summoner/v4/summoners/by-account/" + account_ID    
-        r=requests.get(url, params=payload)
+        r=requests.get(url, headers=payload)
         return r.json()
 
 
@@ -138,8 +141,8 @@ class summonerStats:
 
 
     def matchlist(server, puuid, count=10):
-        region=summonerStats.region
-        url="https://"+region[server.lower()]+".api.riotgames.com/lol/match/v5/matches/by-puuid/"+ puuid +"/ids?start=0&count="+str(count)+"&api_key="+api
+        
+        url="https://"+regions[server.lower()]+".api.riotgames.com/lol/match/v5/matches/by-puuid/"+ puuid +"/ids?start=0&count="+str(count)+"&api_key="+api
         r=requests.get(url).json()
         return r
         
