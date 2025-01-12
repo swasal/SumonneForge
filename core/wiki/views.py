@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from requests import get
+from assets.riot import datadragon
+
+
+
 
 
 """
@@ -18,7 +22,7 @@ def home(request):
 
 def champions(request):
     title="Champions"
-    url="https://ddragon.leagueoflegends.com/cdn/14.10.1/data/en_US/champion.json"
+    url=f"https://ddragon.leagueoflegends.com/cdn/{datadragon.version}/data/en_US/champion.json"
     champion=list(get(url).json()['data'].keys())
 
     data=get(url).json()['data']
@@ -40,7 +44,7 @@ def champions(request):
 
 
 def champdescription(request, id):
-    url="https://ddragon.leagueoflegends.com/cdn/14.10.1/data/en_US/champion/"+ id +".json"
+    url=f"https://ddragon.leagueoflegends.com/cdn/{datadragon.version}/data/en_US/champion/"+ id +".json"
     # champion=list(get(url).json()['data'].keys())
 
     data=get(url).json()
