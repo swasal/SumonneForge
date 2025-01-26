@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-&t^-@)4r3sk0_u076uh!g@$8zkc2ezy9kqam8)i4vw7c2*$p$%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 
+    'localhost',         # Local access
+    '127.0.0.1',         # Local access
+    '192.168.1.8',       # Replace with your local IP address
+    '147.185.221.25'     #playitgg ip
+]
 
 
 # Application definition

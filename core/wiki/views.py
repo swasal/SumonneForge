@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from requests import get
-from assets.riot import datadragon
+from assets.riot import datadragon as datadragon
 
 
 
@@ -21,21 +21,11 @@ def home(request):
 
 
 def champions(request):
-    title="Champions"
-    url=f"https://ddragon.leagueoflegends.com/cdn/{datadragon.version}/data/en_US/champion.json"
-    champion=list(get(url).json()['data'].keys())
-
-    data=get(url).json()['data']
-
-    champ_data=[]
-    for i in champion:
-        d=data[i]
-        x=[d['name'], d['title'], d['tags'], d['id']]
-        champ_data.append(x)
+    champ_data=datadragon.Champion.fecthall()
+    # x=[d['name'], d['title'], d['tags'], d['id']]
     return render(request, 'archive-champions.html', {
-        'title': title,
+        'title': "Champions",
         'data' : champ_data,
-        'name':champion,
     })
 
 
@@ -45,7 +35,6 @@ def champions(request):
 
 def champdescription(request, id):
     url=f"https://ddragon.leagueoflegends.com/cdn/{datadragon.version}/data/en_US/champion/"+ id +".json"
-    # champion=list(get(url).json()['data'].keys())
 
     data=get(url).json()
     champ=data['data'][id]

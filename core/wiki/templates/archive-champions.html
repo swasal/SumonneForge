@@ -4,10 +4,10 @@
     <div class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search for champions" list="champsearchdata" id="searchbar" aria-label="Search">
         <datalist id="champsearchdata">
-            {% for i in name %}
-            <option value="{{ i }}">
+            {% for i in data %}
+            <option value="{{ i.champid }}"></option>
             {% endfor %}
-          </datalist>
+        </datalist>
         <button class="btn btn-outline-light" onclick="champsearch()">Search</button>
     </div>
 
@@ -48,22 +48,22 @@
     <div class="container">
         <div class="row row-cols-2 row-cols-lg-3 ">
             {% for i in data %}
-            <a href="{% url 'champdescription' i.3 %}">
-                <div class="col" id="{{ i.0 }}">
+            <a href="{% url 'champdescription' i.champid %}">
+                <div class="col" id="{{ i.champid }}">
                     <div class="p-3 border-0">
                         <div class="card mb-3 bg-dark bg-opacity-50 text-light" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/{{ i.3 }}_0.jpg"  class="img-fluid rounded-start" alt="Image of {{ i.0 }}">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/loading/{{ i.champid }}_0.jpg"  class="img-fluid rounded-start" alt="Image of {{ i.0 }}">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <!-- Use champ_data['name'] here -->
-                                        <h4 class="card-title">{{ i.0 }}</h4>
-                                        <p class="card-text text-light text-opacity-75">{{ i.1|title }}</p>
+                                        <h4 class="card-title">{{ i.name }}</h4>
+                                        <p class="card-text text-light text-opacity-75">{{ i.title|title }}</p>
                                         <p class="card-text text-light"><small class="text-light text-opacity-50">
                                             <ul>
-                                                {% for j in i.2 %}
+                                                {% for j in i.tags %}
                                                 <li>{{ j }}</li>
                                                 {% endfor %}
                                               </ul>

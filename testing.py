@@ -1,11 +1,12 @@
-from core.assets.riot.riotapi import searchsummoner, summonerStats
+import requests
+import core.assets.riot.datadragon as datadragon
 
-summoner=searchsummoner.by_name('sg2', 'swasal','sg2')
-summoner['puuid']
-print(summoner['puuid'])
-# matches=summonerStats.matchlist('sg2',summoner['puuid'],20)
-# for k,v in summoner.items():
-#     print(f"{k} : {v}")
+url=f"https://ddragon.leagueoflegends.com/cdn/{datadragon.version}/data/en_US/champion/Ahri.json"
+rawdata=requests.get(url).json()['data']
+x=rawdata['Ahri']['image']
 
-# rank=summonerStats.rank(summoner["id"], 'sg2')
-# print(rank)
+
+for k,v in x.items():
+    print(f"{k} : {v}")
+
+print("======\n\n\n")
